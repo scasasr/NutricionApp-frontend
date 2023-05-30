@@ -65,7 +65,7 @@ const NavbarAll = () => {
           ):(
             <>
             {LoginButton("Iniciar sesión")}
-            <Button variant="outline-success" href="register"><HowToRegIcon/>Registrarse</Button>
+            {/* <Button variant="outline-success" href="register"><HowToRegIcon/>Registrarse</Button> */}
             </>  
           )}
           

@@ -1,9 +1,13 @@
 import React from "react";
 
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 import NavbarAll from "../components/Navbar.js";
 
 import {LoginButton} from "../layouts/Login.js";
+
+import API from "../services/http-common.js";
 
 //React-Bootstrap-components
 import Carousel from 'react-bootstrap/Carousel';
@@ -19,7 +23,25 @@ import pancakes from "../assets/pancakes.jpg";
 
 
 const Main = () => {
+    
+    const {user,isAuthenticated} = useAuth0();
+
+    const getUserRegister = (email) =>{
+        API.get('user/correo/'+email).then((response) =>{
+            if(response.data.registro_completo !== 1){
+                window.location.href ='/allergies-comorbidities';
+            }
+        }).catch((error) =>{
+            if(error.response.status === 404){
+                window.location.href ='/allergies-comorbidities';
+            } 
+        })
+    }
     return (  <>
+
+        {isAuthenticated ? (
+            getUserRegister(user.email)
+        ):(<div></div>)}
         <NavbarAll/>
         <div className="principal-container">
             <div className="principal">

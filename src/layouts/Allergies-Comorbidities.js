@@ -172,7 +172,7 @@ const AllergiesComorbidities = () => {
                         type="text" 
                         id="weight" 
                         name= "weight"
-                        placeholder="Peso corporal"
+                        placeholder="Peso corporal en kilogramos"
                         onChange={formik.handleChange} 
                         onBlur={formik.handleBlur}
                         value={formik.values.weight} 
@@ -187,7 +187,7 @@ const AllergiesComorbidities = () => {
                         type="text" 
                         id="height" 
                         name= "height" 
-                        placeholder="Estatura"
+                        placeholder="Estatura en metros"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.height} 
