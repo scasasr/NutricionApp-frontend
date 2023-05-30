@@ -16,7 +16,7 @@ import { Snackbar,Alert } from "@mui/material";
 const Goal = () => {
 
 
-    const {user,isAuthenticated} = useAuth0();
+    const {user} = useAuth0();
 
     const [error, setError] = useState(false);
     const [message, setMessage] = useState('');
@@ -113,9 +113,9 @@ const Goal = () => {
         let year = date.getFullYear()
 
         if(month < 10){
-          return (`${day}-0${month}-${year}`)
+          return (`${year}-0${month}-${day}`)
         }else{
-          return(`${day}-${month}-${year}`)
+          return(`${year}-${month}-${day}`)
         }
     }
 
@@ -135,7 +135,13 @@ const Goal = () => {
                 setTimeout(() => setError(false),7000);
                 return false;
             }
-            const userData =JSON.stringify({nombre_usuario:user.name,fecha_nacimiento:birth,id_estilo_vida:lifestyle}, null, 2);
+            let userData =JSON.stringify({
+                'nombre_usuario':user.name,
+                'fecha_nacimiento':birth,
+                'id_estilo_vida':lifestyle,
+                "registro_completo": 1,
+                'correo':user.email
+            });
             console.log(userData);
             API.post('user/',userData).then((response)=>{
                 if(response.status === 201){
@@ -154,7 +160,11 @@ const Goal = () => {
                 return false;
             });
     
-            const weightData =JSON.stringify({peso:weight,fecha_toma:dateTaken,id_usuario:userId}, null, 2);
+            let weightData =JSON.stringify({
+                'peso':weight,
+                'fecha_toma':dateTaken,
+                'id_usuario':userId
+            });
             API.post('peso/',weightData).then((response)=>{
                 if(response.status === 200){
                     console.log("weight:ok");
@@ -172,7 +182,11 @@ const Goal = () => {
                 return false;
             });
     
-            const heightData =JSON.stringify({estatura:height,fecha_toma:dateTaken,id_usuario:userId}, null, 2);
+            const heightData =JSON.stringify({
+                'estatura':height,
+                'fecha_toma':dateTaken,
+                'id_usuario':userId
+            });
             API.post('estatura/',heightData).then((response)=>{
                 if(response.status === 200){
                     console.log("height:ok");
@@ -192,7 +206,10 @@ const Goal = () => {
     
             var comorbiditieData;
             comorbidities.map((comorbiditie,id) =>{
-                comorbiditieData =JSON.stringify({id_usuario:userId,id_enfermedad:comorbiditie.split(",")[0]}, null, 2);
+                comorbiditieData =JSON.stringify({
+                    'id_usuario':userId,
+                    'id_enfermedad':comorbiditie.split(",")[0]
+            });
                 API.post('enfermedad_usuario/',comorbiditieData).then((response)=>{
                     if(response.status === 200){
                         console.log("Comorbitie:ok");
@@ -213,7 +230,10 @@ const Goal = () => {
     
             var allergieData;
             allergies.map((allergie,id) =>{
-                allergieData =JSON.stringify({id_usuario:userId,id_ingrediente:allergie.split(",")[0]}, null, 2);
+                allergieData =JSON.stringify({
+                    'id_usuario':userId,
+                    'id_ingrediente':allergie.split(",")[0]
+                });
                 API.post('alergia/',allergieData).then((response)=>{
                     if(response.status === 200){
                         console.log("allergie:ok");
