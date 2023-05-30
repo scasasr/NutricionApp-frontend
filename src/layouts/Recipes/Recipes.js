@@ -6,6 +6,7 @@ import { Button, Modal } from 'react-bootstrap';
 import {  Divider } from "@mui/material";
 
 import NavbarAll from "../../components/Navbar.js";
+import Footer from "../../components/footer.js";
 import API from "../../services/http-common.js";
 
 
@@ -35,7 +36,7 @@ const Recipes = () => {
     }
 
     const[showModalSpecificationPost,setShowModalSpecificationPost]= useState(false);
-    const[postsData,setPostsData] = useState([]);
+    
 
 
     const handleOpenModalSpecificationPost = (post) =>{
@@ -68,6 +69,7 @@ const Recipes = () => {
                 </div> 
             ))}
         </div> 
+        <div className="mb-5"></div>
         <Modal show={showModalSpecificationPost} onHide={()=>setShowModalSpecificationPost(false)} disablescrolllock = "true">
                 <Modal.Header closeButton>
                     <Modal.Title>{productName}</Modal.Title>
@@ -96,9 +98,10 @@ const Recipes = () => {
                     </Modal.Body>
                 <Modal.Footer>
                     <Button  className="btn btn-danger" onClick={() => setShowModalSpecificationPost(false)}><CloseIcon/>Cerrar</Button>
-                    <Button  className="btn btn-success"><FavoriteBorderIcon/></Button>
+                    {/* <Button  className="btn btn-success"><FavoriteBorderIcon/></Button> */}
                 </Modal.Footer>
         </Modal> 
+        <Footer className="mt-4"/>
     </> );
 }
  

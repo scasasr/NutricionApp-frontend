@@ -49,8 +49,8 @@ const NavbarAll = () => {
             <Nav.Link href="/">Inicio</Nav.Link>
             {/* <Nav.Link href="/ingredients">Alimentos</Nav.Link> */}
             <Nav.Link href="/recipes">Recetas</Nav.Link>
-            <Nav.Link href="/blog">Blog</Nav.Link>
             <Nav.Link href="/AboutUs">Nosotros</Nav.Link>
+            <Nav.Link href="/legal">Terminos y condiciones</Nav.Link>
           </Nav>
           {isAuthenticated ? (
             <div>

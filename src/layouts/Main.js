@@ -4,6 +4,7 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import NavbarAll from "../components/Navbar.js";
+import Footer from "../components/footer.js";
 
 import {LoginButton} from "../layouts/Login.js";
 
@@ -104,6 +105,7 @@ const Main = () => {
                 </Carousel.Caption>
             </Carousel.Item> */}
         </Carousel>
+        <Footer/>
     </>);
 }
  
