@@ -1,5 +1,7 @@
 import React ,{useState, useEffect} from "react";
 
+import style from "./style.module.scss"
+
 import { Button, Modal } from 'react-bootstrap';
 import {  Divider } from "@mui/material";
 
