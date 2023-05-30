@@ -138,7 +138,7 @@ const Goal = () => {
             let userData =JSON.stringify({
                 'nombre_usuario':user.name,
                 'fecha_nacimiento':birth,
-                'id_estilo_vida':lifestyle,
+                'id_estilo_vida':parseInt(lifestyle,10),
                 "registro_completo": 1,
                 'correo':user.email
             });
@@ -161,9 +161,9 @@ const Goal = () => {
             });
     
             let weightData =JSON.stringify({
-                'peso':weight,
+                'peso':parseInt(weight, 10),
                 'fecha_toma':dateTaken,
-                'id_usuario':userId
+                'id_usuario':parseInt(userId, 10)
             });
             API.post('peso/',weightData).then((response)=>{
                 if(response.status === 200){
@@ -183,9 +183,9 @@ const Goal = () => {
             });
     
             const heightData =JSON.stringify({
-                'estatura':height,
+                'estatura':parseInt(height, 10),
                 'fecha_toma':dateTaken,
-                'id_usuario':userId
+                'id_usuario':parseInt(userId, 10)
             });
             API.post('estatura/',heightData).then((response)=>{
                 if(response.status === 200){
@@ -207,8 +207,8 @@ const Goal = () => {
             var comorbiditieData;
             comorbidities.map((comorbiditie,id) =>{
                 comorbiditieData =JSON.stringify({
-                    'id_usuario':userId,
-                    'id_enfermedad':comorbiditie.split(",")[0]
+                    'id_usuario':parseInt(userId, 10),
+                    'id_enfermedad':parseInt(comorbiditie.split(",")[0], 10)
             });
                 API.post('enfermedad_usuario/',comorbiditieData).then((response)=>{
                     if(response.status === 200){
@@ -231,8 +231,8 @@ const Goal = () => {
             var allergieData;
             allergies.map((allergie,id) =>{
                 allergieData =JSON.stringify({
-                    'id_usuario':userId,
-                    'id_ingrediente':allergie.split(",")[0]
+                    'id_usuario':parseInt(userId, 10),
+                    'id_ingrediente':parseInt(allergie.split(",")[0], 10)
                 });
                 API.post('alergia/',allergieData).then((response)=>{
                     if(response.status === 200){

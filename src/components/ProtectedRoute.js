@@ -7,9 +7,9 @@ export const ProtectedRoute =({children}) =>{
     
     const {isAuthenticated} = useAuth0();
 
-    if(!isAuthenticated){
-        return <Navigate to='/'/>;
-    }
+    // if(!isAuthenticated){
+    //     return <Navigate to='/'/>;
+    // }
 
     return children;
 }

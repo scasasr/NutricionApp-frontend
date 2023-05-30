@@ -27,7 +27,7 @@ const Main = () => {
     const {user,isAuthenticated} = useAuth0();
 
     const getUserRegister = (email) =>{
-        API.get('user/correo/'+email).then((response) =>{
+        API.get('user/correo/'+ email).then((response) =>{
             if(response.data.registro_completo !== 1){
                 window.location.href ='/allergies-comorbidities';
             }
