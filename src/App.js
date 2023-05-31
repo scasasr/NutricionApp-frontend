@@ -6,6 +6,8 @@ import AllergiesComorbidities from "./layouts/Allergies-Comorbidities.js";
 import Goal from "./layouts/Goal.js";
 import Recipes from "./layouts/Recipes/Recipes.js";
 import UserView from "./layouts/UserView";
+import AboutUs from "./layouts/AboutUs.js";
+import Legal from "./layouts/Legal.js";
 import { ProtectedRoute } from "./components/ProtectedRoute.js";
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
          }/>
          <Route path='/recipes' element={<Recipes/>}/>
          <Route path='/dailyProgress' element={<UserView/>}/>
+         <Route path='/aboutus' element={<AboutUs/>}/>
+         <Route path='/legal' element={<Legal/>}/>
        </Routes>
       </BrowserRouter>
       

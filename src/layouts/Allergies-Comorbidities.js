@@ -187,7 +187,7 @@ const AllergiesComorbidities = () => {
                         type="text" 
                         id="height" 
                         name= "height" 
-                        placeholder="Estatura en metros"
+                        placeholder="Estatura en centimetros"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.height} 
