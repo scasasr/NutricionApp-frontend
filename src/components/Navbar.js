@@ -12,6 +12,7 @@ import { Avatar,Stack,Divider, List,ListItem,ListItemButton,ListItemIcon, Swipea
 
 //Icons
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import AddIcon from '@mui/icons-material/Add';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -101,6 +102,14 @@ const NavbarAll = () => {
             <ListItemButton>
             <ListItemIcon>
                 <DonutLargeIcon className="mr-2"/>Progreso diario
+            </ListItemIcon>
+            </ListItemButton>
+            </ListItem>
+
+            <ListItem key={'CreateRecipe'} onClick={() => window.location.href ='CreateRecipe'} disablePadding>
+            <ListItemButton>
+            <ListItemIcon>
+                <AddIcon className="mr-2"/>Crear Receta 
             </ListItemIcon>
             </ListItemButton>
             </ListItem>
