@@ -108,8 +108,8 @@ const UserView = () =>{
     //     }
     // }
 
-    const sumProgress = (value) =>{
-        setProgress(progress+value);
+    const sumProgress = (recipe) =>{
+        setProgress(progress+ parseFloat(recipe.cantidad_calorias));
         document.getElementById("progress-bar").value = "";
     }
 
@@ -167,25 +167,28 @@ const UserView = () =>{
             </ToggleButtonGroup>
            </div>
            <Divider/>
-
-           {console.log(foodType)}
-           {console.log(foodData)}
-            {foodData.map((item,id) =>{
+           
+           <div className="mb-5">
+           {foodData.map((item,id) =>(
                 <div className={style.cartItem}>
                     <img src={item.url_imagen} alt={item.nombre_receta}/>
                     <div className={style.dataContainer}>
                         <div className={style.left}>
-                            <p>{item.cantidad_calorias}</p>
+                            <p> {item.nombre_receta} - Calorias: {item.cantidad_calorias}</p>
                             <div className={style.buttons}>
-                                <button  onClick={()=> sumProgress(parseFloat(item.cantidad_calorias))}>AGREGAR</button>
+                                <button  onClick={()=> sumProgress(item)}>AGREGAR</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            } )}
+            ))}
+
+           </div>
+            
 
 
         </div>
+        <Divider/>
         
         <Footer/>
         
