@@ -30,7 +30,7 @@ const UserView = () =>{
     const {user} = useAuth0();
     const [progress,setProgress] = useState(0);
     const [userId,setUserId] =useState();
-    const [goal,setGoal] =useState();
+    const [goal,setGoal] =useState(2500);
 
     const [weight,setWeight] = useState(0);
     const [height,setHeight] = useState(0);
@@ -121,7 +121,7 @@ const UserView = () =>{
         getHeight(userId);
         setImc(parseInt(parseInt(weight,10)/(Math.pow((parseInt(height,10)/100),2))),10);
         getFoodData();
-      },[]);
+      });
 
     useEffect(() => {
         getFoodData();
@@ -174,9 +174,9 @@ const UserView = () =>{
                     <img src={item.url_imagen} alt={item.nombre_receta}/>
                     <div className={style.dataContainer}>
                         <div className={style.left}>
-                            <p> {item.nombre_receta} - Calorias: {item.cantidad_calorias}</p>
+                            <p style={{color:"#DC7633"}}> {item.nombre_receta} - Calorias: {item.cantidad_calorias}</p>
                             <div className={style.buttons}>
-                                <button  onClick={()=> sumProgress(item)}>AGREGAR</button>
+                                <button  onClick={()=> sumProgress(1200)}>AGREGAR</button>
                             </div>
                         </div>
                     </div>
