@@ -29,6 +29,7 @@ const Main = () => {
 
     const getUserRegister = (email) =>{
         API.get('user/correo/'+ email).then((response) =>{
+            // console.log(response.data.registro_completo);   
             if(response.data.registro_completo !== 1){
                 window.location.href ='/allergies-comorbidities';
             }
@@ -52,7 +53,7 @@ const Main = () => {
                             NutricionApp
                         </h1>
                         <h1 className="title-secondary mb-4">tu mejor aliado<br/>para una vida<br/>más saludable</h1>
-                        {LoginButton("Comenzar ahora")}
+                        {isAuthenticated ?(<></>):(LoginButton("Comenzar ahora"))}
                     </div>  
                     <div></div>
                 </div>

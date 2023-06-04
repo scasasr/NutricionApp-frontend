@@ -3,6 +3,7 @@ import React,{useState, useEffect} from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import NavbarAll from "../components/Navbar.js";
+import Footer from "../components/footer.js";
 
 import { useFormik } from 'formik';
 import * as Yup from "yup";
@@ -20,6 +21,9 @@ import CakeIcon from '@mui/icons-material/Cake';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import SendIcon from '@mui/icons-material/Send';
+import WcIcon from '@mui/icons-material/Wc';
+
+import { Box } from "@mui/material";
 
 const AllergiesComorbidities = () => {
 
@@ -27,6 +31,15 @@ const AllergiesComorbidities = () => {
     // const [message, setMessage] = useState('');
 
     const {user,isAuthenticated} = useAuth0();
+
+    const [gender ,setGender ] = useState(()=>{
+        try {
+            const genderData = localStorage.getItem("gender");
+            return genderData ? JSON.parse(genderData).gender : '';
+        } catch (error) {
+            return '';
+        }
+    });
     
     const [weight,setWeight] = useState(()=>{
         try {
@@ -103,6 +116,11 @@ const AllergiesComorbidities = () => {
         setComorbidities([...comorbidities,event.target.value]);   
     };
 
+    const handleChangeGender = (event) => {
+        setGender(event.target.value);
+
+    };
+
     const handleDeleteAllergie = (allergie) => {
         const aux = allergies.filter(item => item!==allergie);
         setAllergies(aux);
@@ -125,11 +143,13 @@ const AllergiesComorbidities = () => {
 
     const showComorbidities = () => {
         return(<>
-        <Stack className="stack-w mb-2" direction="row" spacing={1}>
-            { comorbidities.map((Comorbiditie,id) =>(
-                <Chip label={ Comorbiditie.split(",")[1]} color="secondary" variant="outlined" onDelete={() => handleDeleteComorbiditie(Comorbiditie)} />
-            ))}   
-        </Stack>
+        <Box sx={{ width:"100%"}}>
+            <Stack className="stack-w mb-2" direction="row" spacing={1}>
+                { comorbidities.map((Comorbiditie,id) =>(
+                    <Chip label={ Comorbiditie.split(",")[1]} color="secondary" variant="outlined" onDelete={() => handleDeleteComorbiditie(Comorbiditie)} />
+                ))}   
+            </Stack>
+        </Box>
         </>)
     }
 
@@ -143,7 +163,7 @@ const AllergiesComorbidities = () => {
         initialValues: {
           weight:weight,
           height:height,
-          birth:birth
+          birth:birth,
         },
         validationSchema:Yup.object({
             weight:Yup.string().required("Este campo es requerido").min(1,"menor a 1 digitos").max(5,"excede los 6 digitos"),
@@ -151,7 +171,11 @@ const AllergiesComorbidities = () => {
             birth:Yup.date().required("Este campo es requerido")
         }),
         onSubmit: values => {
+        //   if(gender ===''){
+
+        //   }
           localStorage.setItem("userData", JSON.stringify(values));
+          localStorage.setItem("gender", JSON.stringify({gender:gender}));
           localStorage.setItem("Allergies", JSON.stringify(allergies));
           localStorage.setItem("Comorbidities", JSON.stringify(comorbidities));
           window.location.href = "./select-goal";
@@ -163,7 +187,7 @@ const AllergiesComorbidities = () => {
     <h1 className="title">Alergia/Comorbilidades</h1>
     <h1 className="title-secondary">Queremos saber un poco más de ti, por favor completa la siguinete información:</h1>
 
-    <div className="allergies-container">
+    <div className="allergies-container mb-4">
         <form className="form mt-0" onSubmit={formik.handleSubmit}>
                 <div className="input-group mb-3">
                     <span className="input-group-text"><MonitorWeightIcon/></span>
@@ -194,7 +218,17 @@ const AllergiesComorbidities = () => {
                     />
                 </div>
                 {formik.touched.height && formik.errors.height ? <div className="error">{formik.errors.height}</div> : null}
-            
+
+                <div className="input-group mb-3">
+                    <span className="input-group-text"><WcIcon/></span>
+                    <select name="gender" id="gender" className="form-control" aria-label="Default select example"
+                    defaultValue={(gender==="F" || gender==="M")?(gender):('placeholder')} onChange={(e) => handleChangeGender(e)}  onBlur={formik.handleBlur}>
+                        <option value='placeholder'disabled>Sexo </option>
+                        <option value="F">Mujer</option>
+                        <option value="M">Hombre</option>   
+                    </select>
+                </div>
+                
                 <div className="input-group mb-3">
                 <span className="input-group-text"><CakeIcon/></span>
                     <input 
@@ -242,6 +276,7 @@ const AllergiesComorbidities = () => {
             
             </form>
     </div>
+    <Footer/>    
            
 
 

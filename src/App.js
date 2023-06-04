@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from "./layouts/Main.js";
@@ -13,26 +14,27 @@ import { ProtectedRoute } from "./components/ProtectedRoute.js";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-       <Routes>
-         <Route path='/' element={<Main/>}/>
-         <Route path='/allergies-comorbidities' element={
-          <ProtectedRoute>
-            <AllergiesComorbidities/>
-          </ProtectedRoute>
-         }/>
-         <Route path='/select-goal' element={
-          <ProtectedRoute>
-            <Goal/>
-          </ProtectedRoute>
-         }/>
-         <Route path='/recipes' element={<Recipes/>}/>
-         <Route path='/dailyProgress' element={<UserView/>}/>
-         <Route path='/aboutus' element={<AboutUs/>}/>
-         <Route path='/legal' element={<Legal/>}/>
-       </Routes>
-      </BrowserRouter>
-      
+      <SnackbarProvider maxSnack={4}>
+        <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/allergies-comorbidities' element={
+            <ProtectedRoute>
+              <AllergiesComorbidities/>
+            </ProtectedRoute>
+          }/>
+          <Route path='/select-goal' element={
+            <ProtectedRoute>
+              <Goal/>
+            </ProtectedRoute>
+          }/>
+          <Route path='/recipes' element={<Recipes/>}/>
+          <Route path='/dailyProgress' element={<UserView/>}/>
+          <Route path='/aboutus' element={<AboutUs/>}/>
+          <Route path='/legal' element={<Legal/>}/>
+        </Routes>
+        </BrowserRouter>
+      </SnackbarProvider>  
     </div>
   );
 }

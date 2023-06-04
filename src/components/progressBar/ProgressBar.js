@@ -27,7 +27,6 @@ const ProgressBar = props =>{
         <>
         <div className="progress-bar-container">
             <div className="principal">
-            <h1 className="title-secondary">Tú progreso</h1>
                 <svg
                     className="circular-chart"
                     width={size}
