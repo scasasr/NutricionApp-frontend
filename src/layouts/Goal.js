@@ -146,7 +146,7 @@ const Goal = () => {
         })
     };
 
-    const createWeight = (dateTaken,userId) =>{
+    const createWeight = async (dateTaken,userId) =>{
         let weightData =JSON.stringify({
             'peso':parseInt(weight, 10),
             'fecha_toma':dateTaken,
@@ -154,7 +154,7 @@ const Goal = () => {
         });
         console.log('Print weight data')
         console.log(weightData)
-        API.post('peso/',weightData).then((response)=>{
+        await API.post('peso/',weightData).then((response)=>{
             if(response.status === 200){
                 enqueueSnackbar("Medida guardada - estatura",{variant:'success'})
             }else if(response.status === 422){
@@ -166,7 +166,7 @@ const Goal = () => {
         });
     }
 
-    const createHeight = (dateTaken,userId) =>{
+    const createHeight = async (dateTaken,userId) =>{
         let heightData =JSON.stringify({
             'estatura':parseInt(height, 10),
             'fecha_toma':dateTaken,
@@ -174,7 +174,7 @@ const Goal = () => {
         });
         console.log('Print height data')
         console.log(heightData)
-        API.post('estatura/',heightData).then((response)=>{
+        await API.post('estatura/',heightData).then((response)=>{
             if(response.status === 200){
                 enqueueSnackbar("Medida guardada - estatura",{variant:'success'})
             }else if(response.status === 422){
@@ -187,7 +187,7 @@ const Goal = () => {
 
     }
 
-    const createRutine = (userId) =>{
+    const createRutine = async (userId) =>{
         let rutineData =JSON.stringify({
             'id_objetivo':parseInt(goal, 10),
             'calorias_diarias': dailyCalories(gender),
@@ -196,7 +196,7 @@ const Goal = () => {
         });
         console.log('Print rutine data')
         console.log(rutineData)
-        API.post('rutinas/',rutineData).then((response)=>{
+        await API.post('rutinas/',rutineData).then((response)=>{
             if(response.status === 200){
                 enqueueSnackbar("Rutina guardada",{variant:'success'})
             }else if(response.status === 422){
@@ -208,16 +208,14 @@ const Goal = () => {
         });
     }
 
-    const createComorbidities = (userId) => {
+    const createComorbiditie = async(userId, comorbiditieId) => {
         var comorbiditieData;
-        console.log('print comorbiditie data ')
-        comorbidities.map((comorbiditie,id) =>{
-            comorbiditieData =JSON.stringify({
-                'id_usuario':userId,
-                'id_enfermedad':parseInt(comorbiditie.split(",")[0], 10)
+        comorbiditieData =JSON.stringify({
+            'id_usuario':userId,
+            'id_enfermedad':comorbiditieId
         });
         console.log(comorbiditieData);
-        API.post('enfermedad_usuario/',comorbiditieData).then((response)=>{
+        await API.post('enfermedad_usuario/',comorbiditieData).then((response)=>{
             if(response.status === 200){
                 enqueueSnackbar('Comorbilidad registrada',{varian:'success'});
             }else if(response.status === 422){
@@ -227,20 +225,24 @@ const Goal = () => {
             var errorData = error.response.data["error"] ;
             enqueueSnackbar(errorData,{variant:'error'})
         });
-        })
-
     }
 
-    const createAllergies = (userId) => {
+    const createComorbidities = (userId) => {
+       
+        console.log('print comorbiditie data ')
+        comorbidities.map((comorbiditie,id) =>{
+            createComorbiditie(userId,parseInt(comorbiditie.split(",")[0], 10));
+        })
+    }
+
+    const createAllergie = async(userId, allergieId) =>{ 
         var allergieData;
-        console.log('print allergie data ')
-        allergies.map((allergie,id) =>{
-            allergieData =JSON.stringify({
-                'id_usuario':userId,
-                'id_ingrediente':parseInt(allergie.split(",")[0], 10)
-            });
+        allergieData =JSON.stringify({
+            'id_usuario':userId,
+            'id_ingrediente':allergieId
+        });
         console.log(allergieData);
-        API.post('alergia/',allergieData).then((response)=>{
+        await API.post('alergia/',allergieData).then((response)=>{
             if(response.status === 200){
                 enqueueSnackbar('Alergia registrada',{variant:'success'});
             }else if(response.status === 422){
@@ -250,11 +252,17 @@ const Goal = () => {
             var errorData = error.response.data["error"] ;
             enqueueSnackbar(errorData,{variant:'error'})
         });
-        })
+        }
+
+    const createAllergies = async(userId) => {
         
+        console.log('print allergie data ')
+        allergies.map((allergie,id) =>{
+            createAllergie(userId,parseInt(allergie.split(",")[0], 10));  
+        }) 
     }
 
-    const createUser = (dateTaken) =>{
+    const createUser = async (dateTaken) =>{
         setOpen(true);
         let userData =JSON.stringify({
             'nombre_usuario':user.name,
@@ -267,7 +275,7 @@ const Goal = () => {
 
         console.log('Print user data')
         console.log(userData)
-        API.post('user/',userData).then((response)=>{
+        await API.post('user/',userData).then((response)=>{
             console.log(response)
             if(response.status === 201){
                 console.log(response.data.id_usuario);

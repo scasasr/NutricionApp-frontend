@@ -92,6 +92,13 @@
   background-color: #FDEBD0;
 }
 
+.subtitle-secondary{
+  font-size: 20px;
+  color: #DC7633;
+  background-color: #FDEBD0;
+  font-style: italic;
+}
+
 .container-white{
   background-color: #fff;
   height: 15vh;
@@ -300,4 +307,18 @@ select.form-control:focus::-ms-value {
   height: 50vh;
 }
 
+.userView-container{
+  padding-left:2%;
+  padding-right:2%;
+  border-radius: 10px;
+  display: inline-block;
+  cursor:pointer;
+  border-color: #198754;
+  border-style: dotted;
+  transition: 1s;
+}
 
+.userView-container{
+  background-color: rgba(0, 0, 0, 0.1 );
+  transition: 1s;
+}
