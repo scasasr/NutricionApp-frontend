@@ -21,6 +21,7 @@ const Recipes = () => {
     const [photo, setPhoto] = useState('');
     const [instruction, setInstruction] = useState('');
     const [foodType,setFooodType] = useState('');
+    const [calories, setCalories] = useState('');
 
 
 
@@ -44,6 +45,7 @@ const Recipes = () => {
         setPhoto(post.url_imagen);
         setInstruction(post.preparacion);
         setFooodType(post.tipo_comida);
+        setCalories(post.cantidad_calorias);
         setShowModalSpecificationPost(true);
         
 
@@ -82,6 +84,8 @@ const Recipes = () => {
                             <div className="py-3">
                                 <h4>Nombre receta: </h4>
                                 <p>{productName}</p>
+                                <Divider/>
+                                <p>Número de calorias: {calories}</p>
                                 <Divider/>
                                 <h4><FoodBankIcon className="mr-1"/>Tipo de comida</h4>
                                 <p>{foodType}</p>

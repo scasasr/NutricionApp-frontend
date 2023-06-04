@@ -40,9 +40,9 @@ const Footer = () => {
                         <ul className="col-12 col-md-3 list-unstyled">
                             <li className="font-weight-bold mb-2" style={{color:'#198754'}}><h5>Siguenos</h5></li>
                             <li className="d-flex justify-content-between">
-                                <a className="text-reset" href='https://es-la.facebook.com/' target="_blank"><FacebookIcon/></a>
+                                <a className="text-reset" href='https://www.facebook.com/profile.php?id=100093491880723' target="_blank"><FacebookIcon/></a>
                                 <a className="text-reset" href='https://www.instagram.com/accounts/login/' target="_blank"><InstagramIcon/></a>
-                                <a className="text-reset" href='https://www.linkedin.com/' target="_blank"><LinkedInIcon/></a>
+                                <a className="text-reset" href='https://www.linkedin.com/company/nutricionapp/' target="_blank"><LinkedInIcon/></a>
                             </li>    
                             
                         </ul>
