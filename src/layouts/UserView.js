@@ -28,6 +28,8 @@ import API from "../services/http-common.js";
 const UserView = () =>{
 
     const {user} = useAuth0();
+
+    const [sum, setSum] = useState(0)
     const [progress,setProgress] = useState(0);
     const [userId,setUserId] =useState();
     const [goal,setGoal] =useState(2500);
@@ -47,7 +49,7 @@ const UserView = () =>{
     const state= {
         size :250,
         goal :goal,
-        progress:progress,
+        progress:sum,
         strokeWidth:15,
         circleOneStroke: '#D1f8cf',
         circleTwoStroke: '#198754'
@@ -107,12 +109,11 @@ const UserView = () =>{
     //         setProgress(0);
     //     }
     // }
-
+    
     const sumProgress = (recipe) =>{
-        setProgress(progress+ parseFloat(recipe.cantidad_calorias));
-        document.getElementById("progress-bar").value = "";
+        setProgress(parseFloat(recipe.cantidad_calorias))
+        setSum(sum+progress);
     }
-
 
     useEffect(() => {
         getUserData();
@@ -125,7 +126,7 @@ const UserView = () =>{
 
     useEffect(() => {
         getFoodData();
-      },foodType);
+      },[foodType]);
 
     return(
         <>
@@ -176,7 +177,7 @@ const UserView = () =>{
                         <div className={style.left}>
                             <p style={{color:"#DC7633"}}> {item.nombre_receta} - Calorias: {item.cantidad_calorias}</p>
                             <div className={style.buttons}>
-                                <button  onClick={()=> sumProgress(1200)}>AGREGAR</button>
+                                <button  onClick={()=> sumProgress(item)}>AGREGAR</button>
                             </div>
                         </div>
                     </div>
