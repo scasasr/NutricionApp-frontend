@@ -85,7 +85,6 @@ const PreparationIngredients = () => {
         await API.put('receta/cambiar_preparacion/'+idRecipe+'/'+preparation).then((response)=>{
             if(response.status === 200){
                 enqueueSnackbar("Preparacion actualizada",{variant:'success'})
-                setTimeout(()=>window.location.href="./Recipes",2000);
             }else if(response.status === 422){
                 enqueueSnackbar("Preparacion no actualizada",{variant:'error'})
 
@@ -112,6 +111,7 @@ const PreparationIngredients = () => {
                 createIngredientsRecipe(recipeId,ingredient.id,ingredient.amount);
             })
             putRecipe(recipeId,formik.values.preparation);
+            setTimeout(()=>window.location.href="./Recipes",4000);
 
         },
       });
