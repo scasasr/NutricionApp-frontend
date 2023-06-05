@@ -9,6 +9,7 @@ import Recipes from "./layouts/Recipes/Recipes.js";
 import UserView from "./layouts/UserView";
 import AboutUs from "./layouts/AboutUs.js";
 import Legal from "./layouts/Legal.js";
+import Recipe_register from "./layouts/Recipe-register.js";
 import { ProtectedRoute } from "./components/ProtectedRoute.js";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path='/dailyProgress' element={<UserView/>}/>
           <Route path='/aboutus' element={<AboutUs/>}/>
           <Route path='/legal' element={<Legal/>}/>
+          <Route path='/CreateRecipe' element={<Recipe_register/>}/>
         </Routes>
         </BrowserRouter>
       </SnackbarProvider>  
