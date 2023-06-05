@@ -185,7 +185,7 @@ const AllergiesComorbidities = () => {
     return (<>
     <NavbarAll/>
     <h1 className="title">Alergia/Comorbilidades</h1>
-    <h1 className="title-secondary">Queremos saber un poco más de ti, por favor completa la siguinete información:</h1>
+    <h1 className="title-secondary">Queremos saber un poco más de ti, por favor completa la siguiente información:</h1>
 
     <div className="allergies-container mb-4">
         <form className="form mt-0" onSubmit={formik.handleSubmit}>
