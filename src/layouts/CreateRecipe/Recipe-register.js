@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
-import NavbarAll from "../components/Navbar.js";
-import Footer from "../components/footer.js";
+import NavbarAll from "../../components/Navbar.js";
+import Footer from "../../components/footer.js";
 
 import SendIcon from '@mui/icons-material/Send';
 import AbcIcon from '@mui/icons-material/Abc';
@@ -10,7 +10,7 @@ import LinkIcon from '@mui/icons-material/Link';
 
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import API from "../services/http-common.js";
+import API from "../../services/http-common.js";
 
 const Recipe_register = () => {
 
@@ -38,7 +38,7 @@ const Recipe_register = () => {
         }),
         onSubmit: values => {
             const recipeData = JSON.stringify(values, null, 2);
-
+            console.log(recipeData)
             API.post('receta/', recipeData).then((response) =>{
                 if(response.status===200){
                     localStorage.setItem("idRecipe", JSON.stringify(response.data.id_receta));
