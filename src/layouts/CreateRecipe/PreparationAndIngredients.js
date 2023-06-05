@@ -103,7 +103,7 @@ const PreparationIngredients = () => {
 
         },
         validationSchema:Yup.object({
-            preparation:Yup.string().required("Este campo es requerido").min(3,"menor a 1 digitos").max(35,"excede los 35 digitos"),
+            preparation:Yup.string().required("Este campo es requerido").min(3,"menor a 1 digitos"),
             amount:Yup.string().required("Este campo es requerido").min(1,"menor a 1 digitos").max(4,"excede los 4 digitos")
         }),
         onSubmit: values => {
