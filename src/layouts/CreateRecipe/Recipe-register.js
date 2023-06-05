@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import NavbarAll from "../../components/Navbar.js";
 import Footer from "../../components/footer.js";
 
+import {useSnackbar } from "notistack";
+
 import SendIcon from '@mui/icons-material/Send';
 import AbcIcon from '@mui/icons-material/Abc';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
@@ -14,7 +16,7 @@ import API from "../../services/http-common.js";
 
 const Recipe_register = () => {
 
-
+    const {enqueueSnackbar} = useSnackbar();
     const [error, setError] = useState(false);
     const [message, setMessage] = useState('');
     const [typeFood, setTypeFood] = useState('');
@@ -27,25 +29,29 @@ const Recipe_register = () => {
     const formik = useFormik({
         initialValues: {
           nombre_receta:'',
-          tipo_comdida:typeFood,
-          preparacion:'',
           url_imagen:'',
-          cantidad_calorias:0
 
         },
         validationSchema:Yup.object({
             nombre_receta:Yup.string().required("Este campo es requerido").min(3,"menor a 1 digitos").max(35,"excede los 35 digitos"),
         }),
         onSubmit: values => {
-            const recipeData = JSON.stringify(values, null, 2);
+            const recipeData = JSON.stringify({
+                'nombre_receta':formik.values.nombre_receta,
+                'tipo_comdida':typeFood,
+                'preparacion':'',
+                'url_imagen':formik.values.url_imagen,
+                'cantidad_calorias':0
+            });
             console.log(recipeData)
             API.post('receta/', recipeData).then((response) =>{
                 if(response.status===200){
                     localStorage.setItem("idRecipe", JSON.stringify(response.data.id_receta));
+                    enqueueSnackbar("Receta creada",{variant:'success'})
                     setTimeout(()=>window.location.href="./finishRecipe",2000);
                 }else if(response.data.status===422){
                     console.log('no se ha podido guardadr la receta')
-
+                    enqueueSnackbar("Error al crear receta",{variant:'error'})
                 }
             }).catch((error)=>{
                 console.log(error);

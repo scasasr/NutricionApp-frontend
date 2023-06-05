@@ -288,8 +288,6 @@ const Goal = () => {
                 createAllergies(userId);
                 createRutine(userId);
                  //delete localstorage
-                localStorage.clear();
-                
             }else if(response.status === 422){
                 enqueueSnackbar("Error al guardar usuario",{variant:'error'})
             }
@@ -349,7 +347,7 @@ const Goal = () => {
                 return false;
             }
             createUser(dateTaken);
-
+            localStorage.clear();
             setTimeout(()=>window.location.href="./",4000);
               
         },
