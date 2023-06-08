@@ -61,7 +61,7 @@ const PreparationIngredients = () => {
 
     }
     
-    const createIngredientsRecipe = async(idRecipe,idIngredient,amount) =>{
+    const createIngredientRecipe = async(idRecipe,idIngredient,amount) =>{
         const data = JSON.stringify({
             "id_receta": parseInt(idRecipe,10),
             "id_ingrediente": parseInt(idIngredient,10),
@@ -77,6 +77,12 @@ const PreparationIngredients = () => {
 
         }).catch((error) =>{
             console.log(error)
+        })
+    }
+
+    const createIngredientsRecipe = () => {
+        ingredients.map((ingredient,id) =>{
+            createIngredientRecipe(recipeId,ingredient.id,ingredient.amount);
         })
     }
 
@@ -107,9 +113,7 @@ const PreparationIngredients = () => {
             amount:Yup.string().required("Este campo es requerido").min(1,"menor a 1 digitos").max(4,"excede los 4 digitos")
         }),
         onSubmit: values => {
-            ingredients.map((ingredient,id) =>{
-                createIngredientsRecipe(recipeId,ingredient.id,ingredient.amount);
-            })
+            createIngredientsRecipe();
             putRecipe(recipeId,formik.values.preparation);
             setTimeout(()=>window.location.href="./Recipes",4000);
 
@@ -133,7 +137,7 @@ const PreparationIngredients = () => {
             defaultValue='placeholder' onChange={(e) => handldeChangeIngredient(e)}  onBlur={formik.handleBlur}>
                 <option value='placeholder' disabled>Seleccione un ingrediente</option>
                 {ingredientsData.map((ingredient,id) =>(
-                    <option key={id} value={[ingredient.id_ingrediente,ingredient.nombre_ingrediente]}>{ingredient.nombre_ingrediente}</option>
+                    <option key={id} value={[ingredient.id_ingrediente,ingredient.nombre_ingrediente,ingredient.cantidad_calorias]}>{ingredient.nombre_ingrediente}</option>
                 ))}
             </select>
             <input 
@@ -146,7 +150,7 @@ const PreparationIngredients = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.amount} 
             />
-            <button className="btn btn-success" onClick={()=>handleAddIngredients({id:ingredient[0],name:ingredient[1],amount:formik.values.amount})}><AddCircleOutlineIcon/></button>
+            <button className="btn btn-success" onClick={()=>handleAddIngredients({id:ingredient[0],name:ingredient[1],calories:ingredient[2],amount:formik.values.amount})}><AddCircleOutlineIcon/></button>
         </div >
         {formik.touched.amount && formik.errors.amount ? <div className="error">{formik.errors.amount}</div> : null}
 
@@ -158,6 +162,7 @@ const PreparationIngredients = () => {
                         {/* <th>id</th> */}
                         <th>Ingrediente</th>
                         <th>Cantidad - g</th>
+                        <th>Calorias</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -167,6 +172,7 @@ const PreparationIngredients = () => {
                             <tr key={id}>
                                 <td>{ingredient.name}</td>
                                 <td>{ingredient.amount}</td>
+                                <td>{((ingredient.amount/100)*ingredient.calories).toFixed(2)}</td>
                                 <td>   
                                     <button onClick={() => handleDeleteIngredient(ingredient)} className="btn btn-danger">
                                         <i><ClearIcon/></i>
