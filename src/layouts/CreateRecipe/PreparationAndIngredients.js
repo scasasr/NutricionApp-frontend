@@ -64,11 +64,11 @@ const PreparationIngredients = () => {
     const createIngredientRecipe = async(idRecipe,idIngredient,amount) =>{
         const data = JSON.stringify({
             "id_receta": parseInt(idRecipe,10),
-            "id_ingrediente": parseInt(idIngredient,10),
-            "cantidad_ingrediente": parseInt(amount,10)
+            "id_ingrediente": idIngredient,
+            "cantidad_ingrediente": amount
         });
-
-       await  API.post('').then((response) =>{
+        console.log(data)
+       await  API.post('ingrediente_receta/',data).then((response) =>{
             if(response.status === 200){
                 enqueueSnackbar("Ingrediente actualizado",{variant:'success'})
             }else if(response.status === 422){

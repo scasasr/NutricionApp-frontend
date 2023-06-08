@@ -116,7 +116,6 @@ const Recipe_register = () => {
         initialValues: {
           nombre_receta:'',
           url_imagen:'',
-
         },
         validationSchema:Yup.object({
             nombre_receta:Yup.string().required("Este campo es requerido").min(3,"menor a 1 digitos").max(35,"excede los 35 digitos"),
