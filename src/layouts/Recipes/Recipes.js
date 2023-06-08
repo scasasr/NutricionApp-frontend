@@ -23,6 +23,7 @@ const Recipes = () => {
     const [instruction, setInstruction] = useState('');
     const [foodType,setFooodType] = useState('');
     const [calories, setCalories] = useState('');
+    const [autor, setAutor] = useState('');
 
 
 
@@ -47,7 +48,9 @@ const Recipes = () => {
         setInstruction(post.preparacion);
         setFooodType(post.tipo_comida);
         setCalories(post.cantidad_calorias);
+        setAutor(post.autor.nombre_usuario);
         setShowModalSpecificationPost(true);
+        
         
 
     }
@@ -87,7 +90,10 @@ const Recipes = () => {
                                 <h4>Nombre receta: </h4>
                                 <p>{productName}</p>
                                 <Divider/>
-                                <p>Número de calorias: {calories}</p>
+                                <h4>Número de calorias:</h4>
+                                <p>{calories}</p>
+                                <h4>Autor:</h4>
+                                <p>{autor}</p>
                                 <Divider/>
                                 <h4><FoodBankIcon className="mr-1"/>Tipo de comida</h4>
                                 <p>{foodType}</p>

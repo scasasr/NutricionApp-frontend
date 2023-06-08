@@ -69,7 +69,7 @@ const AboutUs = () => {
             </Card>
 
             <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea href="" target="_blank">
+                <CardActionArea href="https://www.linkedin.com/in/juan-felipe-herrera-096ab71b3?trk=contact-info" target="_blank">
                     <CardMedia
                     component="img"
                     height="400"
