@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavbarAll from "../components/Navbar.js";
 import Footer from "../components/footer.js";
 
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import * as Yup from "yup";
 import API from "../services/http-common.js";
 
@@ -108,12 +108,22 @@ const AllergiesComorbidities = () => {
     };
 
     const handleChangeAllergie = (event) => {
-        setAllergies([...allergies,event.target.value]);
+        if(event.target.value !== 'ninguno'){
+            setAllergies([...allergies,event.target.value]);
+        }else if(event.target.value === 'ninguno'){
+            setAllergies([]);
+            formik.errors.allergie = 'Puedes continuar asi, pero recuerda que conocer tus alergias es de vital importancia para nosotoros.'
+        }
         
     };
 
     const handleChangeComorbiditie = (event) => {
-        setComorbidities([...comorbidities,event.target.value]);   
+        if(event.target.value !== 'ninguno'){
+            setComorbidities([...comorbidities,event.target.value]);
+        }else if(event.target.value === 'ninguno'){
+            setComorbidities([]);
+            formik.errors.comorbiditie = 'Puedes continuar asi, pero recuerda que conocer tus comorbilidades es de vital importancia para nosotoros.'
+        }
     };
 
     const handleChangeGender = (event) => {
@@ -163,6 +173,8 @@ const AllergiesComorbidities = () => {
         initialValues: {
           weight:weight,
           height:height,
+          allergie:'',
+          comorbiditie:'',
           birth:birth,
         },
         validationSchema:Yup.object({
@@ -171,9 +183,6 @@ const AllergiesComorbidities = () => {
             birth:Yup.date().required("Este campo es requerido")
         }),
         onSubmit: values => {
-        //   if(gender ===''){
-
-        //   }
           localStorage.setItem("userData", JSON.stringify(values));
           localStorage.setItem("gender", JSON.stringify({gender:gender}));
           localStorage.setItem("Allergies", JSON.stringify(allergies));
@@ -249,24 +258,28 @@ const AllergiesComorbidities = () => {
                     <select name="allergie" id="allergie" className="form-control" aria-label="Default select example"
                     defaultValue='placeholder' onChange={(e) => handleChangeAllergie(e)}  onBlur={formik.handleBlur}>
                         <option value='placeholder'disabled>Seleccione los alimentos a los que es alérgico</option>
+                        <option value='ninguno'>NINGUNO</option>
                         {ingredientsData.map((ingredient,id) =>(
                             <option key={id} value={[ingredient.id_ingrediente,ingredient.nombre_ingrediente]}>{ingredient.nombre_ingrediente}</option>
                         ))}
                     </select>
                 </div>
-                {showAllergies()}
+                { (Object.entries(allergies).length === 0) && formik.errors.allergie ? <div className="error">{formik.errors.allergie}</div> : showAllergies()}
+                
 
                 <div className="input-group mb-3">
                     <span className="input-group-text"><LocalHospitalIcon/></span>
-                    <select name="allergie" id="allergie" className="form-control" aria-label="Default select example"
+                    <select name="comorbiditie" id="comorbiditie" className="form-control" aria-label="Default select example"
                     defaultValue='placeholder' onChange={(e) => handleChangeComorbiditie(e)}  onBlur={formik.handleBlur}>
                         <option value='placeholder'disabled>Indique si padece alguna enfermedad</option>
+                        <option value='ninguno'>NINGUNA</option>
                         {comorbiditiesData.map((comorbiditie,id) =>(
                             <option key={id} value={[comorbiditie.id_enfermedad,comorbiditie.nombre_enfermedad]}>{comorbiditie.nombre_enfermedad}</option>
                         ))}
                     </select>
                 </div>
-                {showComorbidities()}
+                { (Object.entries(comorbidities).length === 0) && formik.errors.comorbiditie ? <div className="error">{formik.errors.comorbiditie}</div> : showComorbidities()}
+                
 
 
                 <div> 
