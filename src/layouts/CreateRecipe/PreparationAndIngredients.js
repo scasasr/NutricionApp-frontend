@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from "react";
 
 import NavbarAll from "../../components/Navbar.js";
 import Footer from "../../components/footer.js";
+import FAB from "../../components/Tip.js";
 
 import {useSnackbar } from "notistack";
 
@@ -128,6 +129,7 @@ const PreparationIngredients = () => {
     
     return (<>
     <NavbarAll/>
+    <FAB/>
 
     <div className="allergies-container mb-4">
         <form className="form mt-0" onSubmit={formik.handleSubmit}>

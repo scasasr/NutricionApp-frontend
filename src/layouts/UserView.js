@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavbarAll from "../components/Navbar.js";
 import Footer from "../components/footer.js";
 import ProgressBar from "../components/progressBar/ProgressBar.js";
+import FAB from "../components/Tip.js";
 
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -131,6 +132,7 @@ const UserView = () =>{
     return(
         <>
         <NavbarAll/>
+        <FAB/>
         <div> 
             <ProgressBar {...state}/>
 

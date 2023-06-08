@@ -2,6 +2,7 @@ import React, {useState,useEffect} from "react";
 
 import NavbarAll from "../../components/Navbar.js";
 import Footer from "../../components/footer.js";
+import FAB from "../../components/Tip.js";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
@@ -127,6 +128,7 @@ const Recipe_register = () => {
 
     return (<>
     <NavbarAll/>
+    <FAB/>
     <h1 className="title">Crear Receta </h1>
 
     <div className="allergies-container mb-4">

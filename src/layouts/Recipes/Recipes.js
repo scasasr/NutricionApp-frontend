@@ -7,6 +7,7 @@ import {  Divider } from "@mui/material";
 
 import NavbarAll from "../../components/Navbar.js";
 import Footer from "../../components/footer.js";
+import FAB from "../../components/Tip.js";
 import API from "../../services/http-common.js";
 
 
@@ -57,6 +58,7 @@ const Recipes = () => {
 
     return (<>
         <NavbarAll/>
+        <FAB/>
         <h1 className="title mb-4">Recetas</h1>
         <div class={style.productsContainer}>
             {recipesData.map((recipe,i) =>(     

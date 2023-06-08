@@ -2,6 +2,7 @@ import React from "react";
 
 import NavbarAll from "../components/Navbar.js";
 import Footer from "../components/footer.js";
+import FAB from "../components/Tip.js";
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -17,6 +18,7 @@ const AboutUs = () => {
     return (
     <>
         <NavbarAll/>
+        <FAB/>
         <h2 className="title">NutricionApp</h2>
         <div className="d-flex justify-content-center">
             <div className="aboutUs-container mb-4">

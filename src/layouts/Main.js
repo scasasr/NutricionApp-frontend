@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import NavbarAll from "../components/Navbar.js";
 import Footer from "../components/footer.js";
+import FAB from "../components/Tip.js";
 
 import {LoginButton} from "../layouts/Login.js";
 
@@ -45,6 +46,7 @@ const Main = () => {
             getUserRegister(user.email)
         ):(<div></div>)}
         <NavbarAll/>
+        <FAB/>
         <div className="principal-container">
             <div className="principal">
                 <div className="secondary-container d-flex justify-content-around align-items-center">
