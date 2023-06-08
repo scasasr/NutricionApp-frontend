@@ -438,3 +438,15 @@ select.form-control:focus::-ms-value {
   color: #777777;
   background-color: rgba(0, 0, 0, 0.075);
 }
+
+.aboutUs-container{
+  
+    width: 100%;
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+}
+
