@@ -57,7 +57,15 @@ const ProgressBar = props =>{
                         y={center}
                         className="percentage"
                     >
-                        {progress} cal
+                        {progress} cal /
+                    </text>
+
+                    <text
+                        x={center}
+                        y={center+35}
+                        className="percentage-total"
+                    >
+                        {goal} cal
                     </text>
                     
                 </svg>
