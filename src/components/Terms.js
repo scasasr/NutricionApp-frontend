@@ -14,15 +14,14 @@ const Terms = () => {
         <small>A los efectos de las presentes Condiciones Generales:</small>
         <ul>
 
-            <li> <small><b>Aplicación</b> significa el programa de software proporcionado por la Compañía descargado por Usted en cualquier dispositivo electrónico, denominado AppBastos</small></li>
-            <li> <small><b>Tienda de aplicaciones</b> significa el servicio de distribución digital operado y desarrollado por Apple Inc. (Apple App Store) o Google Inc. (Google Play Store) en el que se ha descargado la Aplicación.</small></li>
+            <li> <small><b>Aplicación</b> significa el programa de software proporcionado por la Compañía descargado por Usted en cualquier dispositivo electrónicoaven</small></li>
             <li> <small><b>País</b> se refiere a: Colombia.</small></li>
             <li> <small><b>Compañía</b> (referida como "la Compañía", "Nosotros", "Nos" o "Nuestro" en este Acuerdo) se refiere a TayronaSolutions, Bogotá</small></li>
             <li> <small><b>Dispositivo</b> se refiere a cualquier dispositivo que pueda acceder al Servicio, como un ordenador, un teléfono móvil o una tableta digital.</small></li>
             <li> <small><b>Servicio</b> se refiere a la Aplicación o al Sitio Web o a ambos.</small></li>
             <li> <small><b>Términos y Condiciones</b> (también denominados "Términos") se refiere a estos Términos y Condiciones que forman el acuerdo completo entre Usted y la Compañía con respecto al uso del Servicio. Este acuerdo de Términos y Condiciones ha sido creado con la ayuda del Generador de Términos y Condiciones.</small></li>
             <li> <small><b>Servicio de Medios Sociales de Terceros</b> se refiere a cualquier servicio o contenido (incluyendo datos, información, productos o servicios) proporcionado por un tercero que puede ser mostrado, incluido o puesto a disposición por el Servicio.</small></li>
-            <li> <small><b>Sitio web</b> se refiere a CorAppBastos, accesible desde https://www.corappbastos.com/</small></li>
+            <li> <small><b>Sitio web</b> se refiere a NutricionApp, accesible desde https://nutricion-app-frontend.vercel.app/legal</small></li>
             <li> <small><b>Usted</b> se refiere a la persona que accede o utiliza el Servicio, o a la empresa, u otra entidad legal en nombre de la cual dicha persona está accediendo o utilizando el Servicio, según sea el caso.</small></li>
         </ul>
 
