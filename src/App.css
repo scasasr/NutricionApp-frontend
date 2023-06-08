@@ -294,6 +294,14 @@ select.form-control:focus::-ms-value {
   font-weight: bold;
 }
 
+.percentage-total{
+  font-size:  2rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-anchor: middle;
+  fill: #DC7633;
+  font-weight: bold;
+}
+
 .input{
   color: #000;
 }
