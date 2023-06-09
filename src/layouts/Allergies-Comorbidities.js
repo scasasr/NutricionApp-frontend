@@ -28,9 +28,18 @@ import { Box } from "@mui/material";
 const AllergiesComorbidities = () => {
 
     // const [error, setError] = useState(false);
-    // const [message, setMessage] = useState('');
+    // const {user,isAuthenticated} = useAuth0();
 
-    const {user,isAuthenticated} = useAuth0();
+    const [age, setAge] = useState(()=>{
+        try {
+            const ageData = localStorage.getItem("age");
+            return ageData ? JSON.parse(ageData).age : '';
+        } catch (error) {
+            return '';
+        }
+    }
+        
+    );
 
     const [gender ,setGender ] = useState(()=>{
         try {
@@ -86,7 +95,13 @@ const AllergiesComorbidities = () => {
         }
     });
 
-    
+    const [warningAllergie, setWarningAllergie] = useState(()=>{
+        return(Object.entries(allergies).length===0)? 'Puedes continuar asi, pero recuerda que conocer tus alergias es de vital importancia para nosotoros.':''
+    });
+
+    const [warningComorbiditie, setWarningComorbiditie] = useState(() => {
+        return(Object.entries(comorbidities).length===0)? 'Puedes continuar asi, pero recuerda que conocer tus comorbilidades es de vital importancia para nosotoros.':''
+    });
 
     const [ingredientsData,setIngredientsData] = useState([]);
     const [comorbiditiesData,setComorbiditiesData] = useState([]);
@@ -109,20 +124,22 @@ const AllergiesComorbidities = () => {
 
     const handleChangeAllergie = (event) => {
         if(event.target.value !== 'ninguno'){
+            setWarningAllergie('');
             setAllergies([...allergies,event.target.value]);
         }else if(event.target.value === 'ninguno'){
             setAllergies([]);
-            formik.errors.allergie = 'Puedes continuar asi, pero recuerda que conocer tus alergias es de vital importancia para nosotoros.'
+            setWarningAllergie('Puedes continuar asi, pero recuerda que conocer tus alergias es de vital importancia para nosotoros.')
         }
         
     };
 
     const handleChangeComorbiditie = (event) => {
         if(event.target.value !== 'ninguno'){
+            setWarningComorbiditie('');
             setComorbidities([...comorbidities,event.target.value]);
         }else if(event.target.value === 'ninguno'){
             setComorbidities([]);
-            formik.errors.comorbiditie = 'Puedes continuar asi, pero recuerda que conocer tus comorbilidades es de vital importancia para nosotoros.'
+            setWarningComorbiditie('Puedes continuar asi, pero recuerda que conocer tus comorbilidades es de vital importancia para nosotoros.');
         }
     };
 
@@ -134,11 +151,17 @@ const AllergiesComorbidities = () => {
     const handleDeleteAllergie = (allergie) => {
         const aux = allergies.filter(item => item!==allergie);
         setAllergies(aux);
+        if(Object.entries(aux).length === 0){
+            setWarningAllergie('Puedes continuar asi, pero recuerda que conocer tus comorbilidades es de vital importancia para nosotoros.');
+        }
     }
 
     const handleDeleteComorbiditie = (comorbiditie) => {
         const aux = comorbidities.filter(item => item!==comorbiditie);
         setComorbidities(aux);
+        if(Object.entries(aux).length === 0){
+            setWarningComorbiditie('Puedes continuar asi, pero recuerda que conocer tus comorbilidades es de vital importancia para nosotoros.');
+        }
     }
 
     const showAllergies = () => {
@@ -163,6 +186,24 @@ const AllergiesComorbidities = () => {
         </>)
     }
 
+    const handleOnChangeBirth = (event) =>{
+        console.log(event.target.value);
+        formik.values.birth = event.target.value
+        getAge(event.target.value);
+    }
+
+    const getAge = (birth) =>{
+        var today = new Date();
+        var birthDate = new Date(birth);
+        var age = today.getFullYear()-birthDate.getFullYear()
+        var m = today.getMonth() - birthDate.getMonth()
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        setAge(age)
+    }
+
     useEffect(() => {
         getIngredients();
         getComorbidities();
@@ -183,8 +224,14 @@ const AllergiesComorbidities = () => {
             birth:Yup.date().required("Este campo es requerido")
         }),
         onSubmit: values => {
+          if(age < 15){
+            return formik.errors.birth = "No cumples con la edad suficiente para registarte.";
+          } else {
+            formik.errors.birth = null;
+          }
           localStorage.setItem("userData", JSON.stringify(values));
           localStorage.setItem("gender", JSON.stringify({gender:gender}));
+          localStorage.setItem("age", JSON.stringify({age:age}));
           localStorage.setItem("Allergies", JSON.stringify(allergies));
           localStorage.setItem("Comorbidities", JSON.stringify(comorbidities));
           window.location.href = "./select-goal";
@@ -246,7 +293,7 @@ const AllergiesComorbidities = () => {
                         id="birth" 
                         name= "birth" 
                         placeholder="Fecha de nacimiento"
-                        onChange={formik.handleChange}
+                        onChange={(e)=>handleOnChangeBirth(e)}
                         onBlur={formik.handleBlur}
                         value={formik.values.birth} 
                     />
@@ -264,7 +311,7 @@ const AllergiesComorbidities = () => {
                         ))}
                     </select>
                 </div>
-                { (Object.entries(allergies).length === 0) && formik.errors.allergie ? <div className="error">{formik.errors.allergie}</div> : showAllergies()}
+                { ((Object.entries(allergies).length === 0) && (warningAllergie !== '')) ? <div className="warning mb-3">{warningAllergie}</div> : showAllergies()}
                 
 
                 <div className="input-group mb-3">
@@ -278,7 +325,7 @@ const AllergiesComorbidities = () => {
                         ))}
                     </select>
                 </div>
-                { (Object.entries(comorbidities).length === 0) && formik.errors.comorbiditie ? <div className="error">{formik.errors.comorbiditie}</div> : showComorbidities()}
+                { ((Object.entries(comorbidities).length === 0) && (warningComorbiditie !== '')) ? <div className="warning mb-3">{warningComorbiditie}</div> : showComorbidities()}
                 
 
 

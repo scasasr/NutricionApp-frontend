@@ -48,6 +48,17 @@ const Goal = () => {
 
     const handleCloseSendVerification = () => setShowSendVerification(false);
 
+    const [age, setAge] = useState(()=>{
+        try {
+            const ageData = localStorage.getItem("age");
+            return ageData ? JSON.parse(ageData).age : '';
+        } catch (error) {
+            return '';
+        }
+    }
+        
+    );
+
 
     const [goal,setGoal] = useState('');
     const [lifestyle,setLifestyle] = useState('');
@@ -108,16 +119,6 @@ const Goal = () => {
     });
 
     const dailyCalories = (gender) =>{ //Fórmula de Harris-Benedict 
-        var today = new Date();
-        var birthDate = new Date(birth);
-        var age = today.getFullYear()-birthDate.getFullYear()
-        var m = today.getMonth() - birthDate.getMonth()
-
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        console.log(age);
-
         if (gender === 'F'){
             console.log((655+(9.6*parseInt(weight),10)+(1.8*parseInt(height,10))-(4.7)*age)*activityFactor)
             return (655+(9.6*parseInt(weight),10)+(1.8*parseInt(height,10))-(4.7)*age)*activityFactor 
@@ -329,7 +330,6 @@ const Goal = () => {
           return(`${year}-${month}-${day}`)
         }
     }
-
 
     const formik = useFormik({
         initialValues: {},
