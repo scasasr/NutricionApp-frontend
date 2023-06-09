@@ -23,22 +23,30 @@ import Brightness6Icon from '@mui/icons-material/Brightness6';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 import API from "../services/http-common.js";
 
 
 const UserView = () =>{
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
 
     const {user} = useAuth0();
 
     const [sum, setSum] = useState(0)
     const [progress,setProgress] = useState(0);
     const [userId,setUserId] =useState();
-    const [goal,setGoal] =useState(2500);
+    const [goal,setGoal] =useState(0);
 
     const [weight,setWeight] = useState(0);
     const [height,setHeight] = useState(0);
     const [imc,setImc] = useState(0);
     const [foodData, setFoodData] = useState([]);
+    const [showAlert,setShowAlert] = useState(false);
 
     
     const [foodType, setFoodType] = useState('Desayuno');
@@ -46,6 +54,7 @@ const UserView = () =>{
     const handleChangeFood = (event, newTypeFood) =>{
         setFoodType(newTypeFood); 
     }
+    const [colorBar,setColorBar] = useState('#198754')
 
     const state= {
         size :250,
@@ -53,7 +62,7 @@ const UserView = () =>{
         progress:sum,
         strokeWidth:15,
         circleOneStroke: '#D1f8cf',
-        circleTwoStroke: '#198754'
+        circleTwoStroke: colorBar
     };
 
 
@@ -113,6 +122,11 @@ const UserView = () =>{
     
     const sumProgress = (recipe) =>{
         setProgress(parseFloat(recipe.cantidad_calorias))
+        if(goal<(sum+progress)){
+            setColorBar('#ff2404');
+            setShowAlert(true);
+            setTimeout(()=>setShowAlert(false),10000);
+        }
         setSum(sum+progress);
     }
 
@@ -187,8 +201,11 @@ const UserView = () =>{
             ))}
 
            </div>
-            
-
+           <Snackbar  anchorOrigin={{vertical:'top', horizontal:'left'}} open={showAlert} autoHideDuration={10000} onClose={() => setShowAlert(false) }>
+                <Alert onClose={() => setShowAlert(false)} severity="error" sx={{ width: '100%' }}>
+                    Haz alcanzado tu limite de calorias por día
+                </Alert>
+            </Snackbar>
 
         </div>
         <Divider/>

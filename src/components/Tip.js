@@ -78,7 +78,7 @@ const FAB = () => {
                         </Fab>
                     </Tooltip>
                 </Box>
-                <Snackbar  anchorOrigin={{vertical:'top', horizontal:'left'}} open={showTips} autoHideDuration={4000} onClose={() => setShowTips(false) }>
+                <Snackbar  anchorOrigin={{vertical:'top', horizontal:'left'}} open={showTips} autoHideDuration={5200} onClose={() => setShowTips(false) }>
                     <Alert onClose={() => setShowTips(false)} severity="success" sx={{ width: '100%' }}>
                         {tip}
                     </Alert>
